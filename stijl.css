@@ -1,10 +1,11 @@
 * { box-sizing:border-box; }
 :root { color-scheme:light; --wit:#fffdfa;
-  --kop:"Cormorant Garamond","Cormorant",Garamond,Georgia,serif;
-  --tekst:"EB Garamond",Garamond,Georgia,serif; }
+  --kop:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --tekst:"DM Sans","Helvetica Neue",Arial,sans-serif; }
 body { margin:0; background:var(--achter); color:var(--inkt); -webkit-font-smoothing:antialiased;
-  font-family:var(--tekst); font-size:18px; line-height:1.6; text-align:center; }
-h1, h2, h3, .merk, .datum { font-family:var(--kop); font-weight:400; text-transform:uppercase; letter-spacing:.06em; }
+  font-family:var(--tekst); font-size:17px; font-weight:300; line-height:1.6; text-align:center; }
+h1, h2, h3, .merk, .datum { font-family:var(--kop); font-weight:600; letter-spacing:-.025em; }
+h1, h2, .merk { text-transform:uppercase; }
 a { color:inherit; }
 
 .balk { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px;
@@ -26,7 +27,7 @@ a { color:inherit; }
 @media (max-width:560px) { .balk .blok { display:none; } }
 
 .hero { padding:clamp(56px,10vw,110px) 20px clamp(52px,9vw,96px); }
-.boven { font-family:var(--kop); text-transform:uppercase; letter-spacing:.14em; font-size:14px; margin:0 0 16px; opacity:.85; }
+.boven { font-family:var(--tekst); font-weight:400; text-transform:uppercase; letter-spacing:.14em; font-size:12px; margin:0 0 16px; opacity:.85; }
 h1 { font-size:clamp(34px,6.4vw,62px); line-height:1.12; margin:0 auto; max-width:16ch; }
 
 .band { position:relative; height:clamp(240px,46vw,480px); overflow:hidden; background:var(--zacht);
@@ -35,7 +36,7 @@ h1 { font-size:clamp(34px,6.4vw,62px); line-height:1.12; margin:0 auto; max-widt
   background:radial-gradient(circle at 25% 35%, var(--accent), transparent 45%),
     radial-gradient(circle at 75% 65%, var(--wit), transparent 45%),
     radial-gradient(circle at 60% 20%, var(--zacht), transparent 50%), var(--zacht); }
-.band p { position:relative; margin:0; font-family:var(--kop); font-style:italic; font-size:clamp(26px,4.6vw,44px);
+.band p { position:relative; margin:0; font-family:var(--kop); font-weight:600; letter-spacing:-.025em; font-size:clamp(28px,4.8vw,48px);
   line-height:1.2; max-width:20ch; }
 
 .sectie { padding:clamp(56px,9vw,100px) 20px; }
@@ -67,12 +68,12 @@ h2 { font-size:clamp(28px,4.6vw,40px); line-height:1.15; margin:0 0 18px; }
 .vak:nth-child(2) .waas { transform:rotate(120deg); }
 .vak:nth-child(3) .waas { transform:rotate(240deg); }
 .vak.open .waas { filter:none; }
-.vak h3 { font-size:clamp(15px,2.4vw,20px); margin:12px 0 0; line-height:1.2; }
+.vak h3 { font-size:clamp(16px,2.6vw,22px); margin:12px 0 0; line-height:1.2; }
 .vak .status { display:block; font-size:14px; font-style:italic; opacity:.75; }
 .vak.nieuw .beeld { outline:1px solid var(--inkt); outline-offset:4px; }
 
 .voet { background:var(--zacht); padding:40px 20px; }
-.voet .merk { font-size:20px; margin-bottom:6px; }
+.voet .merk { font-size:20px; margin-bottom:6px; font-style:normal; opacity:1; }
 .voet p { margin:0; font-size:15px; font-style:italic; opacity:.8; }
 
 dialog { border:0; padding:40px 28px 30px; max-width:460px; width:calc(100% - 32px); background:var(--achter);
