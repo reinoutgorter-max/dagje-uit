@@ -64,7 +64,7 @@
 </dialog>
 
 <script>
-const CFG = {"slug": "578884-arend", "naam": "Arend", "datum_vast": null, "datums": [{"id": "2026-11-15", "label": "Zondag 15 november 2026"}, {"id": "2026-11-22", "label": "Zondag 22 november 2026"}], "mail": {"aan": "r.gorter@me.com", "cc": ["berber-gorter@hotmail.com", "wgorter@live.nl"]}, "vakken": [{"titel": "Tip 1", "beschikbaar": false, "tekst": []}, {"titel": "Tip 2", "beschikbaar": false, "tekst": []}, {"titel": "Uitnodiging", "beschikbaar": false, "tekst": []}]};
+const CFG = {"slug": "578884-arend", "naam": "Arend", "datum_vast": null, "datums": [{"id": "2026-11-15", "label": "Zondag 15 november 2026"}, {"id": "2026-11-22", "label": "Zondag 22 november 2026"}], "vakken": [{"titel": "Tip 1", "beschikbaar": false, "tekst": []}, {"titel": "Tip 2", "beschikbaar": false, "tekst": []}, {"titel": "Uitnodiging", "beschikbaar": false, "tekst": []}], "mail": {"aan": "r.gorter@me.com", "cc": [], "test": true}};
 const sleutel = "dagje-uit-" + CFG.slug;
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -124,8 +124,8 @@ $("ja").addEventListener("click", async () => {
       method: "POST",
       headers: {"Content-Type": "application/json", "Accept": "application/json"},
       body: JSON.stringify({
-        _subject: "Dagje uit: " + onderwerp,
-        _cc: CFG.mail.cc.join(","),
+        _subject: (CFG.mail.test ? "[TEST] " : "") + "Dagje uit: " + onderwerp,
+        ...(CFG.mail.cc.length ? {_cc: CFG.mail.cc.join(",")} : {}),
         _template: "box",
         _captcha: "false",
         Wie: CFG.naam,
