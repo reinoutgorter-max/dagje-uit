@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//dagje-uit//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dagje-uit-2026-11-22@reinoutgorter-max.github.io
+DTSTAMP:20261023T000000Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:Dagje uit met Wouter\, Berber en Reinout 🎉
+DESCRIPTION:Dagvullende verrassing! Meer informatie volgt op https://reinoutgorter-max.github.io/dagje-uit/2a250b-jelly/
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
