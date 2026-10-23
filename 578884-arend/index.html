@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Voor Arend</title>
+<link rel="stylesheet" href="../stijl.css?v=bc174556">
+</head>
+<body>
+<header class="balk"><span class="merk">Voor Arend</span></header>
+<main>
+<section class="hero">
+<p class="label">Een cadeau van je kinderen</p>
+<h1>Gefeliciteerd, lieve pap!</h1>
+<div class="tekst">
+<p>Van harte gefeliciteerd met je verjaardag! Dit jaar krijg je een dagje uit van ons, en we regelen alles.</p>
+<p>Je gaat op pad met Wouter, Berber en Reinout. Wat we gaan doen past bij jou, maar dat blijft nog even een verrassing. In de aanloop naar de dag krijg je hier een paar tips, zodat je kunt raden wat we gaan doen en waar.</p>
+<p>Zodra er een tip klaarstaat, krijg je een mail.</p>
+<p class="afzender">Liefs, Wouter, Berber en Reinout</p>
+</div>
+</section>
+
+<section class="blok" id="kiezen" hidden>
+<h2>Eerst maar eens een datum prikken</h2>
+<p>Welke dag past jou?</p>
+<div class="datums">
+<button class="knop" data-keuze="2026-11-15">Zondag 15 november 2026</button>
+<button class="knop" data-keuze="2026-11-22">Zondag 22 november 2026</button>
+<button class="knop licht" data-keuze="anders">Ik kan op beide dagen echt niet</button>
+</div>
+</section>
+
+<section class="blok" id="gekozen" hidden>
+<div class="gekozen">
+<p class="kop" id="gekozenkop">De datum</p>
+<p class="datum" id="gekozendatum"></p>
+<p class="uitleg" id="gekozenuitleg"></p>
+</div>
+</section>
+
+<section class="rij" id="vakken" hidden>
+<button class="vak"><div class="waas"></div><div class="info"><b>Tip 1</b><span>Nog niet beschikbaar</span></div></button>
+<button class="vak"><div class="waas"></div><div class="info"><b>Tip 2</b><span>Nog niet beschikbaar</span></div></button>
+<button class="vak"><div class="waas"></div><div class="info"><b>Uitnodiging</b><span>Volgt later</span></div></button>
+</section>
+</main>
+
+<dialog id="bevestig">
+<h2 id="bevestigtitel"></h2>
+<p id="bevestigtekst"></p>
+<textarea id="opmerking" placeholder="Welke dagen kun je wel? (mag ook leeg blijven)" hidden></textarea>
+<p class="fout" id="fout" hidden></p>
+<div class="knoppen">
+<button class="knop" id="ja">Ja, bevestigen</button>
+<button class="knop licht" id="nee">Nee, terug</button>
+</div>
+</dialog>
+
+<dialog id="vakmelding">
+<h2 id="vaktitel"></h2>
+<div id="vaktekst"></div>
+<form method="dialog"><button class="knop">Sluiten</button></form>
+</dialog>
+
+<script>
+const CFG = {"slug": "578884-arend", "naam": "Arend", "datum_vast": null, "datums": [{"id": "2026-11-15", "label": "Zondag 15 november 2026"}, {"id": "2026-11-22", "label": "Zondag 22 november 2026"}], "mail": {"aan": "r.gorter@me.com", "cc": ["berber-gorter@hotmail.com", "wgorter@live.nl"]}, "vakken": [{"titel": "Tip 1", "beschikbaar": false, "tekst": []}, {"titel": "Tip 2", "beschikbaar": false, "tekst": []}, {"titel": "Uitnodiging", "beschikbaar": false, "tekst": []}]};
+const sleutel = "dagje-uit-" + CFG.slug;
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+let keuze = null;
+try {
+  if (params.has("wis")) localStorage.removeItem(sleutel);
+  keuze = JSON.parse(localStorage.getItem(sleutel));
+} catch (e) {}
+
+function toon() {
+  const vast = CFG.datum_vast;
+  if (!vast && !keuze) { $("kiezen").hidden = false; $("gekozen").hidden = true; $("vakken").hidden = true; return; }
+  $("kiezen").hidden = true;
+  $("gekozen").hidden = false;
+  $("vakken").hidden = false;
+  if (vast) {
+    $("gekozenkop").textContent = "Zet hem in je agenda";
+    $("gekozendatum").textContent = vast;
+    $("gekozenuitleg").textContent = "Dit is de dag. Hoe laat en waar je verwacht wordt, staat straks in de uitnodiging.";
+  } else if (keuze.id === "anders") {
+    $("gekozenkop").textContent = "Nieuwe datum";
+    $("gekozendatum").textContent = "We zoeken een andere dag";
+    $("gekozenuitleg").textContent = "Wouter, Berber en Reinout hebben je bericht gekregen en komen bij je terug met een nieuwe datum.";
+  } else {
+    $("gekozenkop").textContent = "Je hebt gekozen";
+    $("gekozendatum").textContent = keuze.label;
+    $("gekozenuitleg").textContent = "Wouter, Berber en Reinout hebben een mail gekregen. Zet de dag maar vast in je agenda.";
+  }
+}
+
+let gekozen = null;
+document.querySelectorAll("[data-keuze]").forEach(knop => knop.addEventListener("click", () => {
+  const anders = knop.dataset.keuze === "anders";
+  gekozen = anders ? {id: "anders", label: "Geen van beide data"} : CFG.datums.find(d => d.id === knop.dataset.keuze);
+  $("bevestigtitel").textContent = anders ? "Geen van beide?" : gekozen.label;
+  $("bevestigtekst").textContent = anders
+    ? "Laat je weten dat je op beide dagen niet kunt? Er gaat dan automatisch een mail naar Wouter, Berber en Reinout, dan zoeken zij een andere dag."
+    : "Wil je deze datum bevestigen? Er gaat dan automatisch een mail naar Wouter, Berber en Reinout.";
+  $("opmerking").hidden = !anders;
+  $("opmerking").value = "";
+  $("fout").hidden = true;
+  $("ja").disabled = false;
+  $("ja").textContent = "Ja, bevestigen";
+  $("bevestig").showModal();
+}));
+$("nee").addEventListener("click", () => $("bevestig").close());
+
+$("ja").addEventListener("click", async () => {
+  $("ja").disabled = true;
+  $("ja").textContent = "Even geduld…";
+  const opmerking = $("opmerking").value.trim();
+  const onderwerp = gekozen.id === "anders"
+    ? CFG.naam + " kan op beide data niet"
+    : CFG.naam + " kiest " + gekozen.label.toLowerCase();
+  try {
+    const r = await fetch("https://formsubmit.co/ajax/" + CFG.mail.aan, {
+      method: "POST",
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify({
+        _subject: "Dagje uit: " + onderwerp,
+        _cc: CFG.mail.cc.join(","),
+        _template: "box",
+        _captcha: "false",
+        Wie: CFG.naam,
+        Keuze: gekozen.label,
+        Opmerking: opmerking || "-"
+      })
+    });
+    const antwoord = await r.json().catch(() => ({}));
+    if (!r.ok || String(antwoord.success) !== "true") throw new Error(antwoord.message || r.status);
+  } catch (e) {
+    $("fout").textContent = "Het versturen lukte niet. Probeer het zo nog eens, of laat het ons even weten via de app.";
+    $("fout").hidden = false;
+    $("ja").disabled = false;
+    $("ja").textContent = "Opnieuw proberen";
+    return;
+  }
+  keuze = {id: gekozen.id, label: gekozen.label};
+  try { localStorage.setItem(sleutel, JSON.stringify(keuze)); } catch (e) {}
+  $("bevestig").close();
+  toon();
+  $("gekozen").scrollIntoView({behavior: "smooth", block: "start"});
+});
+
+document.querySelectorAll(".vak").forEach((vak, i) => vak.addEventListener("click", () => {
+  const v = CFG.vakken[i];
+  $("vaktitel").textContent = v.titel;
+  const doos = $("vaktekst");
+  doos.innerHTML = "";
+  doos.className = v.beschikbaar ? "vaktekst" : "";
+  const regels = v.beschikbaar ? v.tekst : [i === 2
+    ? "De uitnodiging volgt later. Daarin lees je wanneer, waar en hoe je verwacht wordt. Je krijgt een mail zodra hij klaarstaat."
+    : "Deze tip is nog niet beschikbaar. Je krijgt vanzelf een mail zodra hij klaarstaat."];
+  regels.forEach(t => { const p = document.createElement("p"); p.textContent = t; doos.appendChild(p); });
+  $("vakmelding").showModal();
+}));
+
+toon();
+</script>
+</body>
+</html>
