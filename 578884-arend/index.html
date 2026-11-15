@@ -71,9 +71,9 @@
 <section class="sectie zacht" id="vakken" hidden>
 <div class="hints">
 <p class="boven">Hints &amp; uitnodiging</p>
-<div class="rij">
-<button class="vak open nieuw"><div class="beeld"><div class="waas"></div></div><h3>Tip 1</h3><span class="status">Nu te lezen</span></button>
-<button class="vak"><div class="beeld"><div class="waas"></div></div><h3>Tip 2</h3><span class="status">Nog geheim</span></button>
+<div class="rij" style="grid-template-columns:repeat(2,1fr)">
+<button class="vak open nieuw"><div class="beeld"><div class="waas"></div><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:clamp(20px,3.6vw,34px);font-weight:600;line-height:1.15;color:var(--inkt)">Tip beschikbaar,<br>klik hier!</span></div><h3>Tip 1</h3><span class="status">Nu te lezen</span></button>
+<!-- Tip 2 vervalt -->
 <button class="vak"><div class="beeld"><div class="waas"></div></div><h3>Uitnodiging</h3><span class="status">Volgt later</span></button>
 </div>
 </div>
@@ -99,7 +99,7 @@
 </dialog>
 
 <script>
-const CFG = {"slug": "578884-arend", "naam": "Arend", "datum_vast": "2026-11-22", "datums": [{"id": "2026-11-15", "label": "Zondag 15 november 2026", "ics": "2026-11-15.ics", "google": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dagje+uit+met+Wouter%2C+Berber+en+Reinout&dates=20261115%2F20261116&details=Dagvullende+verrassing.+Meer+informatie+volgt+op+https%3A%2F%2Freinoutgorter-max.github.io%2Fdagje-uit%2F578884-arend%2F"}, {"id": "2026-11-22", "label": "Zondag 22 november 2026", "ics": "2026-11-22.ics", "google": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dagje+uit+met+Wouter%2C+Berber+en+Reinout&dates=20261122%2F20261123&details=Dagvullende+verrassing.+Meer+informatie+volgt+op+https%3A%2F%2Freinoutgorter-max.github.io%2Fdagje-uit%2F578884-arend%2F"}], "vakken": [{"titel": "Tip 1", "beschikbaar": true, "tekst": ["Drie getallen, één bestemming.", "465 – Tel je met je benen.", "1674 – Een gat werd geslagen dat nooit meer is gedicht.", "1821 – Anders had je levensloop er heel anders uit gezien."]}, {"titel": "Tip 2", "beschikbaar": false, "tekst": []}, {"titel": "Uitnodiging", "beschikbaar": false, "tekst": []}], "mail": {"aan": "r.gorter@me.com", "cc": [], "test": true}};
+const CFG = {"slug": "578884-arend", "naam": "Arend", "datum_vast": "2026-11-22", "datums": [{"id": "2026-11-15", "label": "Zondag 15 november 2026", "ics": "2026-11-15.ics", "google": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dagje+uit+met+Wouter%2C+Berber+en+Reinout&dates=20261115%2F20261116&details=Dagvullende+verrassing.+Meer+informatie+volgt+op+https%3A%2F%2Freinoutgorter-max.github.io%2Fdagje-uit%2F578884-arend%2F"}, {"id": "2026-11-22", "label": "Zondag 22 november 2026", "ics": "2026-11-22.ics", "google": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dagje+uit+met+Wouter%2C+Berber+en+Reinout&dates=20261122%2F20261123&details=Dagvullende+verrassing.+Meer+informatie+volgt+op+https%3A%2F%2Freinoutgorter-max.github.io%2Fdagje-uit%2F578884-arend%2F"}], "vakken": [{"titel": "Tip 1", "beschikbaar": true, "tekst": ["Drie getallen, één bestemming.", "465 – Tel je met je benen.", "1674 – Een gat werd geslagen dat nooit meer is gedicht.", "1821 – Anders had je levensloop er heel anders uit gezien."]}, {"titel": "Uitnodiging", "beschikbaar": false, "tekst": []}], "mail": {"aan": "r.gorter@me.com", "cc": [], "test": true}};
 const sleutel = "dagje-uit-" + CFG.slug;
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -189,7 +189,7 @@ document.querySelectorAll(".vak").forEach((vak, i) => vak.addEventListener("clic
   $("vaktitel").textContent = v.titel;
   const doos = $("vaktekst");
   doos.innerHTML = "";
-  const regels = v.beschikbaar ? v.tekst : [i === 2
+  const regels = v.beschikbaar ? v.tekst : [v.titel === "Uitnodiging"
     ? "De uitnodiging volgt later. Daarin lees je wanneer, waar en hoe je verwacht wordt. Je krijgt een mail zodra hij klaarstaat."
     : "Deze hint is nog niet beschikbaar. Je krijgt vanzelf een mail zodra hij klaarstaat."];
   regels.forEach(t => { const p = document.createElement("p"); p.textContent = t; doos.appendChild(p); });
