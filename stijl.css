@@ -26,20 +26,20 @@ a { color:inherit; }
 .blok:disabled { opacity:.5; cursor:default; }
 @media (max-width:560px) { .balk .blok { display:none; } }
 
-.hero { padding:clamp(56px,10vw,110px) 20px clamp(52px,9vw,96px); }
+.hero { padding:clamp(28px,5vw,48px) 20px clamp(24px,4vw,40px); }
 .boven { font-family:var(--tekst); font-weight:400; text-transform:uppercase; letter-spacing:.14em; font-size:12px; margin:0 0 16px; opacity:.85; }
-h1 { font-size:clamp(34px,6.4vw,62px); line-height:1.12; margin:0 auto; max-width:16ch; }
+h1 { font-size:clamp(30px,5vw,48px); line-height:1.12; margin:0 auto; max-width:16ch; }
 
-.band { position:relative; height:clamp(240px,46vw,480px); overflow:hidden; background:var(--zacht);
+.band { position:relative; height:clamp(110px,18vw,180px); overflow:hidden; background:var(--zacht);
   display:flex; align-items:center; justify-content:center; padding:20px; }
 .band::before { content:""; position:absolute; inset:-20%; filter:blur(40px);
   background:radial-gradient(circle at 25% 35%, var(--accent), transparent 45%),
     radial-gradient(circle at 75% 65%, var(--wit), transparent 45%),
     radial-gradient(circle at 60% 20%, var(--zacht), transparent 50%), var(--zacht); }
-.band p { position:relative; margin:0; font-family:var(--kop); font-weight:600; letter-spacing:-.025em; font-size:clamp(28px,4.8vw,48px);
+.band p { position:relative; margin:0; font-family:var(--kop); font-weight:600; letter-spacing:-.025em; font-size:clamp(22px,3.4vw,32px);
   line-height:1.2; max-width:20ch; }
 
-.sectie { padding:clamp(56px,9vw,100px) 20px; }
+.sectie { padding:clamp(30px,5vw,52px) 20px; }
 .sectie.zacht { background:var(--zacht); }
 h2 { font-size:clamp(28px,4.6vw,40px); line-height:1.15; margin:0 0 18px; }
 .smal { max-width:34em; margin:0 auto; }
@@ -53,15 +53,15 @@ h2 { font-size:clamp(28px,4.6vw,40px); line-height:1.15; margin:0 0 18px; }
 .optie .datum { font-size:clamp(26px,3.4vw,32px); line-height:1.1; margin:4px 0 0; }
 .optie p { margin:0 0 14px; font-size:16px; opacity:.85; }
 
-.vast .datum { font-size:clamp(34px,6vw,58px); line-height:1.08; margin:0 0 18px; }
-.vast p { max-width:32em; margin:0 auto 26px; }
+.vast .datum { font-size:clamp(28px,4.6vw,42px); line-height:1.08; margin:0 0 10px; }
+.vast p { max-width:32em; margin:0 auto 18px; }
 .agenda { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
 
-.hints { max-width:1080px; margin:0 auto; text-align:left; }
+.hints { max-width:860px; margin:0 auto; text-align:left; }
 .hints .boven { margin-bottom:18px; }
 .rij { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,1.6vw,16px); }
 .vak { display:block; padding:0; border:0; background:none; cursor:pointer; text-align:left; font:inherit; color:inherit; }
-.vak .beeld { position:relative; overflow:hidden; aspect-ratio:3/4; background:var(--zacht); }
+.vak .beeld { position:relative; overflow:hidden; aspect-ratio:2/1; background:var(--zacht); }
 .vak .waas { position:absolute; inset:-30%; filter:blur(20px);
   background:radial-gradient(circle at 30% 30%, var(--wit), transparent 45%),
     radial-gradient(circle at 70% 70%, var(--accent), transparent 50%), var(--zacht); }
@@ -72,7 +72,7 @@ h2 { font-size:clamp(28px,4.6vw,40px); line-height:1.15; margin:0 0 18px; }
 .vak .status { display:block; font-size:14px; font-style:italic; opacity:.75; }
 .vak.nieuw .beeld { outline:1px solid var(--inkt); outline-offset:4px; }
 
-.voet { background:var(--zacht); padding:40px 20px; }
+.voet { background:var(--zacht); padding:24px 20px; }
 .voet .merk { font-size:20px; margin-bottom:6px; font-style:normal; opacity:1; }
 .voet p { margin:0; font-size:15px; font-style:italic; opacity:.8; }
 
